@@ -53,7 +53,7 @@ I used an unordered map as my container, which is a hash map that stores key val
     }
 ```
 ### BFS Description
-My BFS implementation utilizes a queue for the frontier, or in other words a queue with the nodes we plan to explore. An unordered set is declared for any discovered nodes, the goal is to avoid visiting the same node twice, which is enforced by discovered and relayed through my cout statement, while aiming to visit all adjacent nodes before traversing deeper. In the while loop you can note that we pop our curr node, cout it, move to the for loop and if any of its adjacent neighbors are not discovered, we prep them to join the queue and repeat the process, ensuring we continue until there are no unvisited nodes. Doing so in this way allows us to delve 1 layer at a time, starting with all 1 length neighbors, all 2 length neighbors, and so on until the process is completed. 
+My BFS implementation utilizes a queue (FIFO) for the frontier, or in other words a queue with the nodes we plan to explore. An unordered set is declared for any discovered nodes, the goal is to avoid visiting the same node twice, which is enforced by discovered and relayed through my cout statement, while aiming to visit all adjacent nodes before traversing deeper. In the while loop you can note that we pop our curr node, cout it, move to the for loop and if any of its adjacent neighbors are not discovered, we prep them to join the queue and repeat the process, ensuring we continue until there are no unvisited nodes. Doing so in this way allows us to delve 1 layer at a time, starting with all 1 length neighbors, all 2 length neighbors, and so on until the process is completed. 
 
 #### DFS
 ```cpp
