@@ -5,7 +5,23 @@ Activity 10 Lab On BFS & DFS for Graphs in C++
 <img width="848" height="405" alt="Graph" src="https://github.com/user-attachments/assets/d158c7f8-828a-4eb0-b2bd-c05a13cb54db" />
 
 ### Task 2: Implement BFS and DFS on the theoretical graph in C++
-Utilizing the psseudocode from the text provided I came up with the following functions for my program. My main program added the edges through a class defined function addEdge.
+Utilizing the pseudocode from the text provided I came up with the following functions for my program. My main program added the edges through a class defined function addEdge.
+
+#### Basic Graph Class
+```cpp
+class Graph{
+    private:
+        unordered_map<char, vector<char>> adjList; //key-value pairs for adjacency list, storing an undirected graph
+    
+    public:
+        void addEdge(char u, char v) { //responsible for setting up edge correlations
+            adjList[u].push_back(v);    //add the passed in chars as neighbors of eachother, 2-way since undirected graph is being made
+            adjList[v].push_back(u);
+        }
+```
+#### Graph short description
+I used an unordered map as my container, which is a hash map that stores key value pairs. In this case the char represents each node and the attached vector all of its neighbors. Since the map is undirected I insert the connection between nodes in each direction ie) u -> v and v -> u.
+
 #### BFS
 ```cpp
     void BFS(char start) { //pass in our starting point, in this case it will always be the letter 'A'
@@ -37,7 +53,7 @@ Utilizing the psseudocode from the text provided I came up with the following fu
     }
 ```
 ### BFS Description
-My BFS implementation utilizes a queue for the frontier, or in other words a queue with the nodes we plan to explore. An unordered set is declared for any discovered nodes, the goal is to avoid visiting the same node twice, which is defined through my cout statement, while aiming to visit all adjacent nodes before traversing deeper. In the while loop you can note that we pop our curr node, cout it, move to the for loop and if any of its adjacent neighbors are not discovered, we prep them to join the queue and repeat the process, ensuring we continue until there are no univsited nodes. Doing so in this way allows us to delve 1 layer at a time, starting with all 1 length neighbors, all 2 length neigbors, and so on until the process is completed. 
+My BFS implementation utilizes a queue for the frontier, or in other words a queue with the nodes we plan to explore. An unordered set is declared for any discovered nodes, the goal is to avoid visiting the same node twice, which is enforced by discovered and relayed through my cout statement, while aiming to visit all adjacent nodes before traversing deeper. In the while loop you can note that we pop our curr node, cout it, move to the for loop and if any of its adjacent neighbors are not discovered, we prep them to join the queue and repeat the process, ensuring we continue until there are no unvisited nodes. Doing so in this way allows us to delve 1 layer at a time, starting with all 1 length neighbors, all 2 length neighbors, and so on until the process is completed. 
 
 #### DFS
 ```cpp
@@ -71,22 +87,8 @@ My BFS implementation utilizes a queue for the frontier, or in other words a que
 };
 ```
 ### DFS description
-In this function we utilize stack to keep DFS' LIFO behavior. Where BFS goal was to traverse one "layer" at a time, DFS goal is to traverse as deep as possible along one path/branch before backtracking and visiting any other node. You can not that the if statement ensure we only cout and mark as visited if the node is not currently visited, this ensure we do not repeat our nodes, and we push all neighbors onto the stack, regardless if visited, because we can verify if we've been there through our if statement. \
+In this function we utilize stack to keep DFS' LIFO behavior. Where BFS goal was to traverse one "layer" at a time, DFS goal is to traverse as deep as possible along one path/branch before backtracking and visiting any other node. You can note that the if statement ensure we only cout and mark as visited if the node is not currently visited, this ensures we do not repeat our nodes, and we push all neighbors onto the stack, regardless if visited, since we can use the if statement at the top of the loop to simply skip them when they are popped.
 
-#### Basic Graph Class
-```cpp
-class Graph{
-    private:
-        unordered_map<char, vector<char>> adjList; //key-value pairs for adjacency list, storing an undirected graph
-    
-    public:
-        void addEdge(char u, char v) { //responsible for setting up edge correlations
-            adjList[u].push_back(v);    //add the passed in chars as neighbors of eachother, 2-way since undirectional graph is being made
-            adjList[v].push_back(u);
-        }
-```
-#### Graph short description
-Since our graph is not directional we use an unordered map which is a hash map that stores key value pairs. In this case the char represents each node and the attached vector all of its neighbors. 
 ```cpp
 int main() {
     Graph test;
@@ -108,4 +110,4 @@ int main() {
 ```
 
 ### Task 3: Compare the search algorithms in context of Big O notations
-Both functions created hold the same time complexity of Big O notation of O(V + E), where V is the number of vertices or nodes and E is the number of edges. Each function has a while loop that runs a maximum of V times and each node is in turn processed once through either discovered or visited. Both for loops also iterate over the neighbors of every V which would occur E total iterations, and specifically does so in this case since there is not direction. 
+Both functions created hold the same time complexity of Big O notation of O(V + E), where V is the number of vertices or nodes and E is the number of edges. Each function has a while loop that runs a maximum of V times and each node is in turn processed once through either discovered or visited. Both for loops also iterate over the neighbors of every V which would occur E total iterations. Because the graph is undirected each edge is stored twice in the adjList (for each connected node), but the total iterations across all neighbor loops is still relative to E.
