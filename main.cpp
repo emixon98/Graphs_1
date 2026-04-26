@@ -1,15 +1,15 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
-#include <queue> //for dfs and bfs structure
-#include <stack>
+#include <queue> //for BFS
+#include <stack> // for DFS
 #include <unordered_set>
 
 using namespace std;
 
 class Graph{
     private:
-        unordered_map<char, vector<char>> adjList; //key-value pairs for adjacency list
+        unordered_map<char, vector<char>> adjList; //key-value pairs for adjacency list, storing an undirected graph
     
     public:
         void addEdge(char u, char v) { //responsible for setting up edge correlations
@@ -53,7 +53,7 @@ class Graph{
 
         cout << "DFS Order: ";
 
-        //keep stack LIFO behavior
+        //keep stack LIFO behavior through top and pop
         while(!dfsStack.empty()) {
             //after first node is in curr, remove it
             char curr = dfsStack.top();
