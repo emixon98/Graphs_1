@@ -89,6 +89,8 @@ My BFS implementation utilizes a queue for the frontier, or in other words a que
 ### DFS description
 In this function we utilize stack to keep DFS' LIFO behavior. Where BFS goal was to traverse one "layer" at a time, DFS goal is to traverse as deep as possible along one path/branch before backtracking and visiting any other node. You can note that the if statement ensure we only cout and mark as visited if the node is not currently visited, this ensures we do not repeat our nodes, and we push all neighbors onto the stack, regardless if visited, since we can use the if statement at the top of the loop to simply skip them when they are popped.
 
+#### Main
+
 ```cpp
 int main() {
     Graph test;
